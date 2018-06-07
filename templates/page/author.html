@@ -1,0 +1,90 @@
+<!--This is a comment-->
+<html>
+<body style="background-color:green">
+<style>
+.red{
+	color:red;
+}
+
+#left_sec{
+	height:300px;
+	width:150px;
+	float:left;
+	padding:0;
+}
+
+#right_sec{
+	height:300px;
+	width:150px;
+	float:left;
+	padding:0;
+}
+  p.prewrap {white-space: pre-wrap;}
+  a:link {color:#FF0000};
+  a:visited {color:#00ff00};
+  a:hover {color:#0000ff};
+  a:active {color:000088};
+</style>
+
+<a href="http://www.baidu.com" target="_blank">Test Link</a>
+
+<h1 style="text-align:left">{{ content.txt_title }}</h1>
+<p style="text-align:left">{{ content.txt_author }}</p>
+<br/>
+<p class="prewrap" style="text-align:left;font-family:arial">{{ content.txt_body }}</p>
+<br/>
+
+
+<div class="red" id="left_sec">
+	This is a style test.
+</div>
+<div class="red" id="right_sec">
+	This is the second style test.
+</div>
+
+<p>Hello,<span class="red">World!</span></p>
+
+<abbr title="loupen">lp</abbr>
+<pre>
+	for(i=0; i<10; i++)
+	{
+		printk("hello, world!\n");
+	}
+</pre>
+<table border="1" cellpadding="10" cellspacing="3" style="background-color:red">
+<tr>
+	<th style="text-align:right">Line1</th>
+	<th>Line2222</th>
+	<th>Line3</th>
+</tr>
+<tr>
+	<td style="text-align:right">a11</td>
+	<td>a12</td>
+	<td>a13</td>
+</tr>
+<tr>
+	<td>a21</td>
+	<td>a22</td>
+	<td>a23</td>
+</tr>
+<tr>
+	<td>a31</td>
+	<td>a32</td>
+	<td>a33</td>
+</tr>
+</table>
+
+<ul type="disc">
+	<li>list1</li>
+	<li>list2</li>
+</ul>
+<ul type="circle">
+	<li>list3</li>
+	<li>list4</li>
+</ul>
+<ol type="a">
+	<li>list1</li>
+	<li>list2</li>
+</ol>
+</body>
+</html>

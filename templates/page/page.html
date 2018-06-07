@@ -1,0 +1,50 @@
+{% load staticfiles %}
+
+<!DOCTYPE HTML>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<head>
+  <title>{{ content.txt_title }}</title>
+  <link type="text/css" rel="StyleSheet" href="{% static 'page/css/page.css' %}"/>
+  <script src="{% static 'jwplayer/jwplayer.js' %}"></script>
+  <script src="{% static 'video-js/video.js' %}"></script>
+</head>
+<body>
+
+<div class="artical">
+  <div class="header">
+    <h4>{{ content.txt_title }}</h4>
+  </div>
+  <div class="author">
+    <pre>作者: {{ content.txt_author }}  {{ content.txt_date|date:"Y-m-d H:i:s" }}</pre>
+  </div>
+  <div class="content">
+      {{content.txt_body|safe}}
+  </div>
+</div>
+
+<!--
+<video class="video-js" controls preload="auto" width="640" height="480">
+	<source src="{% static 'page/1.mp4' %}" type="video/mp4">
+</video>
+
+<div id="player">Loading the player...</div>
+<script>
+  const player = jwplayer('player').setup({
+  	file:"{% static 'page/1.mp4' %}",
+  });
+
+  player.on('pause', function() {
+	//alert('Why did my usr pause their video instead of watching it?');
+  });
+
+ /* player.on('seek', function(e) {
+	//alert("current position" + e.position + "\nnew:" + e.offset);
+	if(e.position != e.offset)
+		alert("current position" + e.position + "\nnew:" + e.offset);
+		//player.seek(e.offset);
+  });*/
+</script>
+-->
+</body>
+</html>

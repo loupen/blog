@@ -1,0 +1,12 @@
+{% load staticfiles %}
+<html>
+<head>
+</head>
+<body>
+<form action="{% url 'page:upload' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

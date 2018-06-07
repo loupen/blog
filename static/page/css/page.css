@@ -1,0 +1,56 @@
+html,body {
+  display:block;
+  margin:0 auto;
+  position:relative;
+  background-color:#f5f6f7;
+}
+
+* {
+	margin:0;
+}
+
+body * {
+  font-family: PingFang SC, Hiragino Sans GB,Arial,Microsoft YaHei, Verdana, Roboto,Noto,Helvetica Neue, sans-serif !important;
+}
+
+
+.artical {
+	padding-left:5%;
+	padding-right:5%;
+	padding-top:20px;
+}
+
+@media screen and (min-width: 1024px) {
+	.artical {
+		width:750px;
+		padding-left:20%;
+	}
+}
+
+.header {
+	display:block;
+	font-weight:300;
+	font-size: 22px;
+	line-height:1.4;
+	margin-bottom:14px;
+	/*
+	border-style:none;
+	border-width:1px;
+	border-bottom-style:solid;
+	border-color:#73777A;
+	*/
+}
+
+.author {
+	font-size:14px;
+	line-height:20px;
+	color:#73777A;
+	margin-bottom:20px;
+}
+
+.content p {
+	font-size:16px;	
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	line-height: 2em;
+}
