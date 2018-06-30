@@ -5,9 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <head>
   <title>{{ content.txt_title }}</title>
-  <link type="text/css" rel="StyleSheet" href="{% static 'page/css/page.css' %}"/>
+  <link type="text/css" rel="StyleSheet" href="{% static 'page/css/page.css' %}">
   <script src="{% static 'jwplayer/jwplayer.js' %}"></script>
   <script src="{% static 'video-js/video.js' %}"></script>
+  <script src="{% static 'highlight/highlight.pack.js' %}"></script>
+  <script src="{% static 'highlight/demo/jquery-2.1.1.min.js' %}"></script>
+  <script src="{% static 'highlight/demo/perfect-scrollbar.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'highlight/demo/styles/qtcreator_dark.css' %}">
+  <link rel="stylesheet" href="{% static 'highlight/demo/perfect-scrollbar.min.css' %}">
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
 

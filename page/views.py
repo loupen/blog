@@ -14,10 +14,12 @@ import markdown2
 import re
 import hashlib
 import lxml.etree as ET
+from lxml import html
 import urllib.request
 import urllib.parse
 import json
 import accessToken
+import cgi
 
 
 # Create your views here.
@@ -28,7 +30,13 @@ class PageView(generic.DetailView):
 	def get_object(self):
 		object = super().get_object()
 		object.txt_body = markdown2.markdown(object.txt_body)
-		#print(object.txt_body)
+		'''
+		p1 = r"(<code>)([\s\S]+?)(</code>)"
+		reg_pattern1 = re.compile(p1)
+		def sub_cb(str1):
+			return '%s%s%s' %(str1.group(1), cgi.escape(str1.group(2)), str1.group(3))
+		object.txt_body = reg_pattern1.sub(sub_cb, object.txt_body)
+		'''
 		return object
 
 	def get_context_data(self, **kwargs):
@@ -57,6 +65,7 @@ class IndexView(generic.ListView):
 		content_list = Content.objects.all().order_by('-txt_date')
 		for item in content_list:
 			item.txt_body = markdown2.markdown(item.txt_body)
+			'''
 			p1 = r">([^<>]+?)<"
 			p2 = r"\n\n+"
 			p1_result = ''
@@ -66,6 +75,11 @@ class IndexView(generic.ListView):
 				tmp = reg_pattern2.sub("\n",i)
 				p1_result += tmp # + " "
 			item.txt_body = p1_result + " ..."
+			'''
+			root = ET.HTML(item.txt_body)
+			p_lab = root.xpath('//p[1]')
+			item.txt_body = p_lab[0].text
+	
 		context['content_list'] = content_list;
 		return context
 

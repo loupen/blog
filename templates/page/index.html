@@ -43,9 +43,9 @@
       <ul>
         {% for author in author_list %}
           <li><a href="{% url 'page:author' author.id %}">
-            <img src="{{ author.pic }}" alt="lost"/>
-            <p>{{ author.author}}</p>
-            <p>{{ author.brief }}</p>
+            <div class="ar_img"><img src="{{ author.pic }}" alt="lost"/></div>
+            <div class="ar_ar"><p>{{ author.author}}</p></div>
+            <div class="ar_brief"><p>{{ author.brief }}</p></div>
             </a>
           </li>
         {% endfor %}
@@ -61,11 +61,10 @@
       <ul>
         {% for content in content_list %}
           <li><a href="{% url 'page:page' content.id %}">
-            <img src="{{ content.txt_author.pic }}" alt="lost"/>
-            <h3>{{ content.txt_title}}</h3>
-            <h5>{{ content.txt_author.author}}</h5>
-            <h5>{{ content.txt_date }}</h5>
-            <pre><p>{{ content.txt_body|safe}}</p></pre>
+            <div class="pg_img"><img src="{{ content.txt_author.pic }}" alt="lost"/></div>
+			<div class="pg_title"><strong><p>{{ content.txt_title}}</p></strong></div>
+            <div class="pg_author"><p>{{ content.txt_author.author}} {{ content.txt_date|date:"Y-m-d H:i:s" }}</p></div>
+		  	<div class="pg_content"><p>{{ content.txt_body|safe}}...</p></div>
             </a>
           </li>
         {% endfor %}
@@ -80,20 +79,18 @@
     <p>  </p>
   </div>
   <div style="clear:both;"></div>
-  <div class="icp_content">
-    <a href="http://www.miitbeian.gov.cn">粤ICP备18025368号-2</a>
+  <div class="bt_foot">
+    <div class="icp_content">
+      <a href="http://www.miitbeian.gov.cn">粤ICP备18025368号-2</a>
+    </div>
+    <div style="width:300px;margin:0 auto; padding:0 0;">
+      <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502001522" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+        <img src="{% static 'page/record.png' %}" style="float:left;"/>
+        <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤公网安备 44030502001522号</p>
+      </a>
+    </div>
   </div>
-  <div style="width:300px;margin:0 auto; padding:20px 0;">
-    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502001522" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
-      <img src="{% static 'page/record.png' %}" style="float:left;"/>
-      <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤公网安备 44030502001522号</p>
-    </a>
-  </div>
-
-  <div style="clear:both;"></div>
-
 <!--
-
   <script type="text/javascript" src="{% static 'page/js/star.js' %}"></script>
   <script>
     /*document.ready(function(){
