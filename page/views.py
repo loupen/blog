@@ -20,6 +20,7 @@ import urllib.parse
 import json
 import accessToken
 import cgi
+import mqtt_control
 
 
 # Create your views here.
@@ -164,3 +165,118 @@ class WeChatView(generic.DetailView):
 
 		return HttpResponse("success")
 	'''
+class TianMaoView(generic.DetailView):
+	model = Author
+	template_name = 'page/author.html'
+	dis_res = {
+			"header": {
+					"namespace": "AliGenie.Iot.Device.Discovery",
+					"name": "DiscoveryDevicesResponse",
+					"messageId": "ea426b7c-7d71-4421-bd9b-860617bd5ac8",
+					"payLoadVersion": 1
+			},
+			"payload": {
+					"devices": [{
+							"deviceId": "34ea34cf2eff",
+							"deviceName": "灯",
+							"deviceType": "light",
+							"zone": "",
+							"brand": "",
+							"model": "",
+							"icon": "http://119.23.235.141/static/page/img/redmoon.jpg",
+							"properties": [{
+									"name": "powerstate",
+									"value": "off"
+							}],
+							"actions": [
+									"TurnOn",
+									"TurnOff"
+							],
+							"extensions": {
+									"extension1": "",
+									"extension2": ""
+							}
+					}]
+			}
+	}
+	con_res = {
+			"header": {
+					"namespace": "AliGenie.Iot.Device.Control",
+					"name": "TurnOnResponse",
+					"messageId": "ea426b7c-7d71-4421-bd9b-860617bd5ac8",
+					"payLoadVersion": 1
+			},
+			"payload": {
+					"deviceId": "34ea34cf2eff",
+			}
+	}
+
+	def get(self, request, *args, **kwargs):
+		print("get:"+request.body.decode("utf-8"))
+		return HttpResponse("success")
+		try:
+			signature = request.GET['signature']
+			echostr = request.GET['echostr']
+			timestamp = request.GET['timestamp']
+			nonce = request.GET['nonce']
+			token = "loupen"
+
+			list1 = [token, timestamp, nonce]
+			list1.sort()
+			sha1 = hashlib.sha1()
+			for i in list1:
+				sha1.update(i.encode('utf-8'))
+			hashcode = sha1.hexdigest()
+			print("signature:" + signature)
+			print("echostr:" + echostr)
+			print("timestamp:" + timestamp)
+			print("nonce:" + nonce)
+			print("hashcode:" + hashcode)
+		
+			if hashcode == signature:
+				return HttpResponse(echostr)
+		except:
+			return HttpResponse("error")
+
+		return HttpResponse("error")
+
+	def AddElement(self, root, tag, text, flag):
+		tmp = ET.SubElement(root, tag)
+		if flag == 0:
+			tmp.text = text
+		else:
+			tmp.text = ET.CDATA(text)
+	
+
+	def post(self, request, *args, **kwargs):
+		print("post:"+request.body.decode("utf-8"))
+		#try:
+		req_data = json.loads(request.body.decode("utf-8"))
+		req_namespace = req_data["header"]["namespace"] 
+		req_name = req_data["header"]["name"] 
+		req_msg_id = req_data["header"]["messageId"] 
+		
+		print("req_namespace:" + req_namespace)
+		print("req_name:" + req_name)
+		print("req_msg_id:" + req_msg_id)
+		if req_namespace == "AliGenie.Iot.Device.Discovery":
+			dis_res = self.dis_res
+			dis_res["header"]["messageId"] = req_msg_id;
+			print("return:" + str(dis_res))
+			return HttpResponse(str(dis_res))
+		elif req_namespace == "AliGenie.Iot.Device.Control":
+			con_res = self.con_res
+			con_res["header"]["name"] = req_name + "Response"
+			con_res["header"]["messageId"] = req_msg_id;
+			con_res["payload"]["deviceId"] = req_data["payload"]["deviceId"]
+			print("return:" + str(con_res))
+			ret = mqtt_control.SendControlMsg(req_name)
+			if ret == "OK":
+					print("mqtt send success!")
+			else:
+					print("mqtt send fail!")
+			return HttpResponse(str(con_res))
+		#except:
+		print("invalid wechat messages!")
+
+		return HttpResponse("success")

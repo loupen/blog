@@ -12,9 +12,11 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 import accessToken
+import mqtt_control
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "blog.settings")
 
 accessToken.CreateThread()
+mqtt_control.CreateThread()
 
 application = get_wsgi_application()

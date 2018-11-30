@@ -22,12 +22,17 @@ def get_file_label(f):
 				'<img src="' + pathName + '" ' + 'style="width:100%;" alt="lost"/>\n' +\
 				'</div>\n'
 	elif ext1 in video_ext:
+		'''
 		label = '\n<div id="' + ext0 + '" ' + 'width="100%" height="480px"> Loading the player... </div>\n' + \
 				'<script>\n' + \
 				'	jwplayer("' + ext0 + '")' + '.setup({\n' + \
 				'		file:"' + pathName + '",\n' + \
 				'	});\n' + \
 				'</script>\n'
+		'''
+		label = '\n<video class="video-js" controls preload="auto">\n' + \
+				'	<source src="' + pathName + '"' + ' type="video/mp4">\n' + \
+				'</video>\n'
 
 	pathName = settings.BASE_DIR + pathName
 	print(pathName)

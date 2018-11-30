@@ -11,6 +11,9 @@ html,body {
 
 body {
   font-family: PingFang SC, Hiragino Sans GB,Arial,Microsoft YaHei, Verdana, Roboto,Noto,Helvetica Neue, sans-serif !important;
+  /*
+  font-family: Consolas,Inconsolata,Courier,monospace,"PingFang SC","Microsoft YaHei",sans-serif;
+  */
 }
 
 
@@ -22,6 +25,12 @@ body {
 	background-color: #ffffff;
 }
 
+/*
+.video-js {
+	width:100%;
+}
+*/
+
 @media screen and (min-width: 1024px) {
 	.artical {
 		width:50%;
@@ -30,6 +39,11 @@ body {
 		margin-right:20%;
 		padding-right:5%;
 	}
+	/*
+	.video-js {
+		width:70%;
+	}
+	*/
 }
 
 .header {
@@ -89,8 +103,8 @@ body {
 	/*
 	text-indent:2em;
 	*/
-	margin-top:0.5em;
-	margin-bottom:0.5em;
+	margin-top:1.5em;
+	margin-bottom:1.5em;
 }
 
 .content img {
@@ -122,7 +136,10 @@ body {
 }
 
 pre {
-	font-size:14px;
-	font-family: monospace;
+	font-size:15px;
+	/*font-family: monospace;*/
+    font-family: Consolas,Inconsolata,Courier,monospace,"PingFang SC","Microsoft YaHei",sans-serif;
 	line-height:1em;
 }
+
+
